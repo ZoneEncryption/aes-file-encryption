@@ -51,15 +51,15 @@ def decrypt_file(file_path, key_path):
         key = f.read()
 	
     # Decrypt the file
-	with open(file_path, 'rb') as f:
-		ciphertext = f.read()
+    with open(file_path, 'rb') as f:
+        ciphertext = f.read()
 	
-	cipher = AES.new(key, AES.MODE_EAX)
-	plaintext = cipher.decrypt(ciphertext)
+    cipher = AES.new(key, AES.MODE_EAX)
+    plaintext = cipher.decrypt(ciphertext)
 
-	# Write the decrypted file
-	with open(file_path[:-4], 'wb') as f:
-		f.write(plaintext)
+    # Write the decrypted file
+    with open(file_path[:-4], 'wb') as f:
+        f.write(plaintext)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="A simple command line tool that encrypts and decrypts files using AES encryption and stores the key in a separate file.")    
