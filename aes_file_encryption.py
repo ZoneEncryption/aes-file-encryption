@@ -49,16 +49,17 @@ def decrypt_file(file_path, key_path):
     # Read the key from file
     with open(key_path, 'rb') as f:
         key = f.read()
-
+	
     # Decrypt the file
-    with open(file_path, 'rb') as f:
-        nonce, tag, ciphertext = [f.read(x) for x in (16, 16, -1)]
-    cipher = AES.new(key, AES.MODE_EAX, nonce)
-    plaintext = cipher.decrypt_and_verify(ciphertext, tag)
+	with open(file_path, 'rb') as f:
+		ciphertext = f.read()
+	
+	cipher = AES.new(key, AES.MODE_EAX)
+	plaintext = cipher.decrypt(ciphertext)
 
-    # Write the decrypted file
-    with open(file_path[:-4], 'wb') as f:
-        f.write(plaintext)
+	# Write the decrypted file
+	with open(file_path[:-4], 'wb') as f:
+		f.write(plaintext)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="A simple command line tool that encrypts and decrypts files using AES encryption and stores the key in a separate file.")    
