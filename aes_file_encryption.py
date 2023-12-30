@@ -54,7 +54,7 @@ def decrypt_file(file_path, key_path):
     with open(file_path, 'rb') as f:
         ciphertext = f.read()
 	
-    cipher = AES.new(key, AES.MODE_EAX)
+    cipher = AES.new(key, AES.MODE_SIV)
     plaintext = cipher.decrypt(ciphertext)
 
     # Write the decrypted file
